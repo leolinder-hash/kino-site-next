@@ -1,0 +1,48 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  padding: 1.5rem 4rem;
+
+  background: black;
+  color: white;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+}
+
+.nav {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+
+  a {
+    padding: 0.8rem 1.2rem;
+
+    background: #9f1717;
+    border-radius: 0.5rem;
+    color: white;
+
+    font-size: 0.9rem;
+    font-weight: 700;
+    text-decoration: none;
+
+    transition: background 0.2s ease;
+
+    &:hover {
+      background: #c51f1f;
+    }
+  }
+
+  .loginBtn {
+    background: #d9f5b4 !important;
+    color: black !important;
+
+    &:hover {
+      background: #c7e89e !important;
+    }
+  }
+}
