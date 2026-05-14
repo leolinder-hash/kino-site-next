@@ -1,21 +1,25 @@
-import { NextResponse } from 'next/server';
-import { connectDB } from '@/lib/mongodb';
-import mongoose from 'mongoose';
+import { NextResponse } from "next/server";
+import { connectDB } from "@/lib/mongodb";
+import Movie from "@/models/Movie";
 
 export async function GET() {
   try {
     await connectDB();
 
-    // Access the collection directly — no model needed for this test
-    const db = mongoose.connection.db;
-    const movies = await db
-      .collection('movies')
-      .find({})
-      .limit(3)
-      .toArray();
+    const movies = await Movie.find({}).limit(3);
 
-    return NextResponse.json({ success: true, count: movies.length, movies });
+    return NextResponse.json({
+      success: true,
+      count: movies.length,
+      movies,
+    });
   } catch (error) {
-    return NextResponse.json({ success: false, error: error.message }, { status: 500 });
+    return NextResponse.json(
+      {
+        success: false,
+        error: error.message,
+      },
+      { status: 500 }
+    );
   }
 }
