@@ -13,7 +13,13 @@ const bookingSchema = new mongoose.Schema({
     },
     seats: {
         type: [String],
-        required: true
+        required: true,
+        validate: {
+            validator: function (value) {
+                return value.length > 0;
+            },
+            message: "At least one seat must be selected."
+        }
     },
     status: {
         type: String,
@@ -26,5 +32,5 @@ const bookingSchema = new mongoose.Schema({
     }
 });
 
-const Booking= mongoose.models.Booking || mongoose.model('Booking', bookingSchema);
+const Booking = mongoose.models.Booking || mongoose.model('Booking', bookingSchema);
 export default Booking;
