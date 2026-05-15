@@ -1,6 +1,5 @@
 import mongoose from "mongoose";
 import bcrypt from "bcryptjs";
-import { unique } from "next/dist/build/utils";
 
 const userSchema = new mongoose.Schema(
     {
@@ -25,6 +24,7 @@ const userSchema = new mongoose.Schema(
     password: {
         type: String,
         required: [true, "Password is required"],
+        minlength: [8, "Password must be at least 8 characters"],
         select: false,
     },
 },
@@ -33,11 +33,11 @@ const userSchema = new mongoose.Schema(
 }
 );
 userSchema.pre("save", async function () {
-    if(this.isModified("password")) return;
+    if(!this.isModified("password")) return;
     this.password = await bcrypt.hash(this.password, 12);
 });
 userSchema.methods.comparePassword = async function (candidatePassword) {
     return bcrypt.compare(candidatePassword, this.password);
 };
-const User = mongoose.models.user || mongoose.model("user", userSchema);
+const User = mongoose.models.User || mongoose.model("User", userSchema);
 export default User;
