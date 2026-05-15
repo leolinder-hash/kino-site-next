@@ -3,6 +3,8 @@ import { connectDB } from "@/lib/mongodb";
 import Movie from "@/models/Movie";
 import Screening from "@/models/Screening";
 
+//Test function to make sure that the screening model can be created, information can be pushed, and it can fetch from existing movies. 
+
 const generateSeats = (rows, seatsPerRow) => {
   const seats = [];
   for (const row of rows) {
@@ -17,8 +19,19 @@ export async function GET() {
   try {
     await connectDB();
 
+    // Fetch existing movie from DB
+    const movie = await Movie.findOne({});
+    console.log('found movie:', movie);
+
+    if (!movie) {
+      return NextResponse.json(
+        { success: false, error: 'No movies found in the database' },
+        { status: 404 }
+      );
+    }
+
     const sampleScreening = await Screening.create({
-      movie: '573a1390f29313caabcd42e8',
+      movie: movie._id,
       startTime: new Date('2026-06-01T19:00:00.000Z'),
       room: 'Salong 1',
       totalSeats: 30,
