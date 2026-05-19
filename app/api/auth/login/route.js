@@ -2,7 +2,6 @@ import {NextResponse} from "next/server";
 import {connectDB} from "@/lib/mongodb";
 import User from "@/models/User";
 import { AUTH_COOKIE_NAME, createAuthToken} from "@/lib/auth";
-import { redirect } from "next/dist/server/api-utils";
 
 export const runtime = "nodejs";
 
@@ -75,7 +74,8 @@ export async function POST(request) {
             httpOnly: true,
             secure: process.env.NODE_ENV === "production",
             sameSite: "lax",
-            maxAge: 60*60*24*7, // 7 days
+            path: "/",
+            maxAge: 60*60*24*7, 
         });
         return response;
     }catch(error){
