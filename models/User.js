@@ -3,10 +3,15 @@ import bcrypt from "bcryptjs";
 
 const userSchema = new mongoose.Schema(
     {
-    name: {
+    username: {
     type: String,
-    required: [true, "Name is required"],
+    required: [true, "Username is required"],
+    unique: true,
+    lowercase: true,
     trim: true,
+    minlength: [3, "Username must be at least 3 characters"],
+    maxlength:[30, "Username must be less than 30 characters"],
+    match: [/^[a-zA-Z0-9_]+$/, "Username can only contain letters, numbers, and underscores"],
     },
     email:{
         type: String,
@@ -19,7 +24,7 @@ const userSchema = new mongoose.Schema(
     password: {
         type: String,
         required: [true, "Password is required"],
-        minlength:[8, "Password must be at least 8 characters"],
+        minlength: [8, "Password must be at least 8 characters"],
         select: false,
     },
 },
@@ -34,5 +39,5 @@ userSchema.pre("save", async function () {
 userSchema.methods.comparePassword = async function (candidatePassword) {
     return bcrypt.compare(candidatePassword, this.password);
 };
-const User = mongoose.models.user || mongoose.model("User", userSchema);
+const User = mongoose.models.User || mongoose.model("User", userSchema);
 export default User;
