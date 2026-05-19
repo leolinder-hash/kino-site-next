@@ -1,3 +1,11 @@
-export default function MoviePage(){
-  return <h1>This is the movie page!</h1>
+import MovieCard from "@/components/MovieCard"
+
+export default function MoviePage() {
+  return (
+    <div>
+      <h1>Alla filmer</h1>
+      <MovieCard />
+    </div>
+
+  )
 }
