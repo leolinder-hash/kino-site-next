@@ -6,8 +6,8 @@ import ReviewForm from '@/components/ReviewForm';
 export default function ReviewsPage() {
     const [reviews, setReviews] = useState([]);
     const [error, setError] = useState('');
-
-    const [movieId, setMovieId] = useState('6a06fd90b790be1ac622ca6e');
+    const [movieId, setMovieId] = useState('');
+    const [userId, setUserId] = useState('');
 
     useEffect(() => {
         const fetchReviews = async () => {
@@ -61,6 +61,17 @@ export default function ReviewsPage() {
         {error && <p style={{ color: 'white', background: '#9f1717', padding: '1rem', borderRadius: '0.5rem', fontWeight: 'bold' }}>{error}</p>}
 
         <div style={{ marginBottom: '2rem', background: '#111', padding: '1rem', borderRadius: '0.5rem', border: '1px solid #222' }}>
+
+        <div style={{ marginBottom: '1.2rem' }}>
+        <label style={{ display: 'block', marginBottom: '0.5rem', color: '#888', fontSize: '0.85rem' }}>Test-Användar-ID:</label>
+        <input
+        type="text"
+        value={userId}
+        onChange={(e) => setUserId(e.target.value)}
+        style={{ width: '100%', padding: '0.5rem', background: '#222', border: '1px solid #444', color: 'white', borderRadius: '0.25rem' }}
+        />
+        </div>
+        
         <label style={{ display: 'block', marginBottom: '0.5rem', color: '#888', fontSize: '0.85rem' }}>Film-ID:</label>
         <input
         type="text"
@@ -70,7 +81,7 @@ export default function ReviewsPage() {
         />
         </div>
 
-        <ReviewForm movieId={movieId} onSuccess={refreshList} />
+        <ReviewForm movieId={movieId} userId={userId} onSuccess={refreshList} />
 
         <h3>Recensioner</h3>
         <ul style={{ listStyle: 'none', padding: 0 }}>
