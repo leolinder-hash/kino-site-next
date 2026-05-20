@@ -1,0 +1,106 @@
+.card {
+  display: flex;
+  flex-direction: column;
+  margin-top: 2rem;
+  align-items: center;
+  overflow-x: hidden;
+  max-width: 18rem;
+  border: 1px solid rgb(96, 94, 94);
+  border-radius: 2rem;
+  text-align: center;
+  padding: 0 2rem;
+  gap: 1rem;
+  box-shadow: 0 0 0.5rem 0.5rem rgb(29, 29, 29);
+
+  &:hover {
+    transition: ease-in-out 0.3s;
+    transform: scale(1.03);
+  }
+
+  /* &__image {
+    width: 100%;
+    height: 24rem;
+    object-fit: contain;
+    border-radius: 1rem 1rem 0 0;
+  } */
+
+  &__details {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+  }
+
+  &__header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 0.3rem;
+    margin-top: 0.3rem;
+  }
+
+  &__ageLimit {
+    background-color: rgb(79, 78, 78);
+    font-size: 0.8rem;
+    padding: 0.4rem;
+    border-radius: 0.4rem;
+    border: 1px solid black;
+  }
+
+  &__genre {
+    font-size: 0.9rem;
+  }
+
+  &__description {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+
+    display: -webkit-box;
+    -webkit-line-clamp: 4;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+
+  }
+
+  &__button {
+    display: flex;
+    font-weight: bold;
+    width: 6rem;
+    height: 2.5rem;
+    background-color: #9f1717;
+    border-radius: 0.5rem;
+    color: white;
+    text-decoration: none;
+    justify-content: center;
+    align-items: center;
+    margin-top: auto;
+    margin-bottom: 1rem;
+
+    &:hover {
+      background-color: #c51f1f;
+    }
+  }
+}
+
+
+
+
+
+/* .card a {
+  display: flex;
+  font-weight: bold;
+  width: 5rem;
+  height: 2.5rem;
+  background-color: #9f1717;
+  border-radius: 0.5rem;
+  color: white;
+  text-decoration: none;
+  justify-content: center;
+  align-items: center;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+
+  &:hover {
+    background-color: #c51f1f;
+  }
+} */

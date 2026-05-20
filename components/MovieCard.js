@@ -6,19 +6,28 @@ export default function MovieCard({ movie }) {
   return (
     <article className={styles.card}>
       <Image
+        className={styles.card__image}
         src={movie.image}
-        width={500}
-        height={500}
+        width={300}
+        height={350}
         alt={`Poster for ${movie.title}`}
       />
       <div className={styles.card__details}>
         <h2>{movie.title}</h2>
-        <p>{movie.ageLimit}</p>
-        <p>{movie.genre.join(", ")}</p>
-        <p>{movie.description}</p>
+        <div className={styles.card__header}>
+          <p className={styles.card__genre}>
+            {movie.genre.join(", ")}
+          </p>
+          <span className={styles.card__ageLimit}>
+            {`${movie.ageLimit}+`}
+          </span>
+        </div>
+        <p className={styles.card__description}>
+          {movie.description}</p>
       </div>
 
       <Link
+        className={styles.card__button}
         href={`/movies/${movie._id}`}>
         Boka nu
       </Link>
