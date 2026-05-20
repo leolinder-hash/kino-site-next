@@ -2,18 +2,21 @@
 
 import { useState } from 'react';
 
-export default function ReviewForm({ movieId, onSuccess }) {
+export default function ReviewForm({ movieId, userId, onSuccess }) {
     const [rating, setRating] = useState(5);
     const [reviewText, setReviewText] = useState('');
     const [error, setError] = useState('');
     const [success, setSuccess] = useState(false);
 
-    const userId = '111111111111111111111111';
-
     const handleSubmit = async (e) => {
         e.preventDefault();
         setError('');
         setSuccess(false);
+
+        if(!userId) {
+            setError('Ange Test-Användar-ID först.');
+            return;
+        }
 
         if (!movieId) {
             setError('Systemfel: Inget film-ID kunde identifieras.');
