@@ -16,7 +16,9 @@ export default async function MoviePage() {
     return (
       <div className={styles.movies__page}>
         <h1>Våra filmer</h1>
-        <section className={styles.movies__grid}>
+        <section
+          className={styles.movies__grid}
+        >
           {movies.map((movie => (
             <MovieCard key={movie._id} movie={movie} />
           )))
@@ -24,7 +26,7 @@ export default async function MoviePage() {
         </section>
       </div>
     )
-  } catch (error){
+  } catch (error) {
     console.log(error);
     return <p>Movies could not load</p>
   }

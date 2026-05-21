@@ -9,7 +9,7 @@ export default function MovieCard({ movie }) {
         className={styles.card__image}
         src={movie.image}
         width={300}
-        height={350}
+        height={340}
         alt={`Poster for ${movie.title}`}
       />
       <div className={styles.card__details}>
