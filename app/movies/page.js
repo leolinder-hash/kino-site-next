@@ -1,5 +1,4 @@
 import MovieList from "@/components/MovieList";
-import MovieCard from "@/components/MovieCard";
 import styles from "./page.module.scss";
 
 export default async function MoviePage() {
@@ -16,7 +15,7 @@ export default async function MoviePage() {
 
     return (
       <>
-        <h1 className="{styles.page__title">
+        <h1 className={styles.page__title}>
           Våra filmer
         </h1>
         <MovieList movies={movies} />
