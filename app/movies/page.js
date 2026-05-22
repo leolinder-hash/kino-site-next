@@ -1,3 +1,4 @@
+import MovieList from "@/components/MovieList";
 import MovieCard from "@/components/MovieCard";
 import styles from "./page.module.scss";
 
@@ -14,17 +15,12 @@ export default async function MoviePage() {
     const { movies } = await response.json();
 
     return (
-      <div className={styles.movies__page}>
-        <h1>Våra filmer</h1>
-        <section
-          className={styles.movies__grid}
-        >
-          {movies.map((movie => (
-            <MovieCard key={movie._id} movie={movie} />
-          )))
-          }
-        </section>
-      </div>
+      <>
+        <h1 className="{styles.page__title">
+          Våra filmer
+        </h1>
+        <MovieList movies={movies} />
+      </>
     )
   } catch (error) {
     console.log(error);
