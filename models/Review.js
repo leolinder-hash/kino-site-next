@@ -1,4 +1,6 @@
 import mongoose from 'mongoose';
+import '@/models/User';
+import '@/models/Movie';
 
 const { Schema, model, models } = mongoose;
 
