@@ -20,6 +20,6 @@ export default async function MovieDetailPage({ params }) {
 
   } catch (error) {
     console.log(error);
-    return <p>Movie could not load</p>
+    return <p>Movie could not be found</p>
   }
 }
