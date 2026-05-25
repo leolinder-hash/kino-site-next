@@ -16,7 +16,7 @@ export default function Header() {
       </Link>
 
       <nav className={styles.nav}>
-        <Link href="/movies">Alla filmer</Link>
+        <Link href="/movies">Våra filmer</Link>
         <Link href="/about">Om oss</Link>
         <Link href="/login" className={styles.loginBtn}>
           Logga in

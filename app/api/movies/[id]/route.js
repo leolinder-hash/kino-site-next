@@ -37,6 +37,6 @@ export async function GET(request, { params }) {
       success: false,
       message: error.message
     },
-      { status: 404 })
+      { status: 500 })
   }
 };
