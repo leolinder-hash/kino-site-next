@@ -3,23 +3,41 @@ import styles from "./MovieDetail.module.scss"
 
 export default function MovieDetail({ movie }) {
   return (
-    <div>
-      <h1>{movie.title}</h1>
-      <Image
-        src={movie.image}
-        width={300}
-        height={340}
-        alt={`Poster for ${movie.title}`}
-      />
-      <p>Genre: {movie.genre.join(", ")}</p>
-      <p>Längd: {movie.duration} min</p>
-      <span>Ålder: {movie.ageLimit}+</span>
-      <p>{movie.description}</p>
+    <section className={styles.detail}>
 
-      <h2>Visningar</h2>
-      {/* LÄGG IN SCREENINGSKOMPONENT */}
+      <div className={styles.detail__imageWrapper}>
+        <Image
+          src={movie.image}
+          width={300}
+          height={400}
+          alt={`Poster for ${movie.title}`}
+        />
+      </div>
 
-      <button>Välj biljetter</button>
-    </div>
+      <div className={styles.detail__content}>
+
+        <h1>{movie.title}</h1>
+
+        <div className={styles.detail__meta}>
+          <span>Genre: {movie.genre.join(", ")}</span>
+          <span>Längd: {movie.duration} min</span>
+          <span>Ålder: {movie.ageLimit}+</span>
+        </div>
+
+        <div className={styles.detail__descriptionSection}>
+          <h3>Om filmen</h3>
+          <p className={styles.detail__description}>
+            {movie.description}
+          </p>
+        </div>
+
+        <h2>Visningar</h2>
+        {/* LÄGG IN SCREENINGSKOMPONENT */}
+
+        <button className={styles.detail__button}>
+          Välj biljetter
+        </button>
+      </div>
+    </section>
   )
 }
