@@ -4,6 +4,7 @@ import {notFound} from 'next/navigation';
 import mongoose from 'mongoose';
 import {connectDB} from '@/lib/mongodb';
 import Screening from '@/models/Screening';
+import "@/models/Movie";
 import SeatSelection from '@/components/SeatSelection';
 import styles from './page.module.scss';
 
@@ -61,7 +62,7 @@ export default async function BookingPage({params}) {
              <SeatSelection seats={safeScreening.seats}/>
              <section className={styles.bookingActions}>
                 <p>
-                    Platsvaelt visar här som grund, men ska ändras i nästa issue så att platserna blir klickbara och kopplar platser till bokningsknappen.
+                    Platsvalet visar här som grund, men ska ändras i nästa issue så att platserna blir klickbara och kopplar platser till bokningsknappen.
                 </p>
                 <button type="button" disabled>
                     Fortsätt till bokning
