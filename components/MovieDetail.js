@@ -1,6 +1,7 @@
 import Image from "next/image";
 import styles from "./MovieDetail.module.scss"
 import ReviewForm from "./ReviewForm";
+import MovieReviews from "./MovieDetailReviews";
 
 export default function MovieDetail({ movie }) {
   return (
@@ -47,6 +48,7 @@ export default function MovieDetail({ movie }) {
       </section>
 
       <section className={styles.reviewsSection}>
+        <MovieReviews movieId={movie._id} />
         <h2>Har du sett filmen?</h2>
         <ReviewForm
           movieId={movie._id}
