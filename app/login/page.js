@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 "use client";
 
 import Link from "next/link";
@@ -43,3 +44,10 @@ export default function LoginPage() {
     </div>
   );
 }
+=======
+import LoginForm from "@/components/LoginForm";
+
+export default function LoginPage() {
+  return <LoginForm />;
+}
+>>>>>>> cf73d2b1f0fee3b1255df58f8bc20c8af7948386

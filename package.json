@@ -10,10 +10,13 @@
     "lint": "eslint",
     "test": "jest",
     "test:watch": "jest --watch",
+    "seed:users": "node --env-file=.env.local scripts/seedUsers.js",
     "seed:movies": "node --env-file=.env.local scripts/seedMovies.js"
+
   },
   "dependencies": {
     "bcryptjs": "^3.0.3",
+    "jsonwebtoken": "^9.0.3",
     "mongoose": "^9.6.2",
     "next": "16.2.6",
     "react": "19.2.4",

@@ -6,7 +6,7 @@ import styles from "./register.module.scss";
 
 export default function RegisterPage() {
   const [formData, setFormData] = useState({
-    name: "",
+    username: "",
     email: "",
     password: "",
   });
@@ -27,8 +27,8 @@ export default function RegisterPage() {
   function validateForm() {
     const newErrors = {};
 
-    if (!formData.name.trim()) {
-      newErrors.name = "Name is required";
+    if (!formData.username.trim()) {
+      newErrors.username = "Username is required";
     }
 
     if (!formData.email.trim()) {
@@ -65,7 +65,7 @@ export default function RegisterPage() {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          username: formData.name,
+          username: formData.username,
           email: formData.email,
           password: formData.password,
         }),
@@ -80,7 +80,7 @@ export default function RegisterPage() {
 
       setSuccessMessage("Account created successfully!");
       setFormData({
-        name: "",
+        username: "",
         email: "",
         password: "",
       });
@@ -97,16 +97,18 @@ export default function RegisterPage() {
 
         <form onSubmit={handleSubmit} className={styles.form}>
           <div className={styles.field}>
-            <label htmlFor="name">Name</label>
+            <label htmlFor="username">Username</label>
             <input
-              id="name"
-              name="name"
+              id="username"
+              name="username"
               type="text"
-              value={formData.name}
+              value={formData.username}
               onChange={handleChange}
-              placeholder="Enter your name"
+              placeholder="Enter your username"
             />
-            {errors.name && <p className={styles.error}>{errors.name}</p>}
+            {errors.username && (
+              <p className={styles.error}>{errors.username}</p>
+            )}
           </div>
 
           <div className={styles.field}>
