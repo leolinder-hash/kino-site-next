@@ -12,7 +12,6 @@ export default async function MovieDetailPage({ params }) {
     }
 
     const { movie } = await response.json();
-    console.log(movie);
 
     return (
       <MovieDetail movie={movie} />

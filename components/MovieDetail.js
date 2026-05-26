@@ -32,17 +32,22 @@ export default function MovieDetail({ movie }) {
               {movie.description}
             </p>
           </div>
+        </div>
+      </section>
 
+      <section className={styles.screeningsSection}>
+        <div>
           <h2>Visningar</h2>
           {/* LÄGG IN SCREENINGSKOMPONENT */}
 
-          <button className={styles.detail__button}>
+          <button className={styles.screeningsSection__button}>
             Välj biljetter
           </button>
         </div>
       </section>
 
       <section className={styles.reviewsSection}>
+        <h2>Har du sett filmen?</h2>
         <ReviewForm
           movieId={movie._id}
         />
