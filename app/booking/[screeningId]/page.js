@@ -5,7 +5,7 @@ import mongoose from 'mongoose';
 import {connectDB} from '@/lib/mongodb';
 import Screening from '@/models/Screening';
 import SeatSelection from '@/components/SeatSelection';
-import styles from './page.module.css';
+import styles from './page.module.scss';
 
 function formatScreeningDate(date) {
     return new Intl.DateTimeFormat('sv-SE', {
@@ -50,7 +50,7 @@ export default async function BookingPage({params}) {
                     <p className = {styles.room}>Salong: {safeScreening.room}</p>
 
                 </div>
-                <image 
+                <Image 
                     src={movie.image || "/kino-logo-v2.png"}
                     alt={`Poster for ${movie.title}`}
                     width={220}
