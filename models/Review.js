@@ -1,6 +1,7 @@
 import mongoose from 'mongoose';
-import '@/models/User';
-import '@/models/Movie';
+
+import './User.js';
+import '.Movie.js';
 
 const { Schema, model, models } = mongoose;
 

@@ -10,7 +10,8 @@
     "lint": "eslint",
     "test": "jest",
     "test:watch": "jest --watch",
-    "seed:movies": "node --env-file=.env.local scripts/seedMovies.js"
+    "seed:movies": "node --env-file=.env.local scripts/seedMovies.js",
+    "seed:reviews": "node --env-file=.env.local scripts/seedReviews.js"
   },
   "dependencies": {
     "bcryptjs": "^3.0.3",
