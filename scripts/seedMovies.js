@@ -38,6 +38,42 @@ const movies = [
     image: "/images/barbie.jpg",
     featured: false,
   },
+  {
+    title: "Interstellar",
+    description: "När jorden står inför en global kris ger sig ett team av astronauter ut genom ett maskhål i rymden för att hitta en ny framtid för mänskligheten.",
+    genre: ["Sci-Fi", "Adventure"],
+    duration: 169,
+    ageLimit: 11,
+    image: "/images/interstellar.jpg",
+    featured: true,
+  },
+  {
+    title: "Mad Max: Fury Road",
+    description: "I en postapokalyptisk ökenvärld tvingas Max slå sig samman med Furiosa i en farlig flykt undan en brutal härskare.",
+    genre: ["Action", "Adventure"],
+    duration: 120,
+    ageLimit: 15,
+    image: "/images/madmax.jpg",
+    featured: false,
+  },
+  {
+    title: "Parasite",
+    description: "En familj med begränsade resurser tar sig steg för steg in i en rik familjs liv, vilket leder till oväntade och dramatiska konsekvenser.",
+    genre: ["Drama", "Thriller"],
+    duration: 132,
+    ageLimit: 15,
+    image: "/images/parasite.jpg",
+    featured: true,
+  },
+  {
+    title: "Spider-Man: Into the Spider-Verse",
+    description: "Tonåringen Miles Morales blir Spider-Man och möter hjältar från andra dimensioner i ett äventyr genom flera universum.",
+    genre: ["Animation", "Action"],
+    duration: 117,
+    ageLimit: 7,
+    image: "/images/spiderman.jpg",
+    featured: true,
+  },
 ];
 
 async function seedMovies() {
