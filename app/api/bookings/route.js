@@ -21,7 +21,7 @@ export async function POST(req) {
             screeningId,
             seats: { $in: seats },
             status: "confirmed"
-        })
+        });
 
         if (existingBooking) {
             return NextResponse.json({
@@ -31,6 +31,30 @@ export async function POST(req) {
         }
 
         const screening = await Screening.findById(screeningId);
+
+        if (!screening) {
+            return NextResponse.json({
+                success: false,
+                error: "Screening not found"
+            }, { status: 404 });
+        }
+
+        const missingSeats = seats.filter(selectedSeat => {
+            const seat = screening.seats.find((seat) => {
+                const seatCode = `${seat.row}${seat.number}`;
+                return seatCode === selectedSeat;
+            });
+
+            return !seat || seat.isBooked;
+
+        });
+
+        if (missingSeats.length > 0) {
+            return NextResponse.json({
+                success: false,
+                error: "One or more selected seats are not available."
+            }, { status: 400 });
+        }
 
         seats.forEach((selectedSeat) => {
             const seat = screening.seats.find((seat) => {
