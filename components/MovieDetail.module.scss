@@ -1,0 +1,87 @@
+.movieDetailPage {
+  display: flex;
+  flex-direction: column;
+  gap: 4rem;
+  max-width: 70rem;
+  margin: 0 auto;
+  padding: 3rem 2rem;
+}
+
+.screeningsSection {
+  border-radius: 0.5rem;
+  width: 100%;
+  margin: 0 auto;
+  border: 1px solid #222;
+  padding: 2rem;
+
+  &__button {
+    margin-top: 3rem;
+    padding: 0.8rem 1.2rem;
+
+    background: #9f1717;
+    border-radius: 0.5rem;
+    border: none;
+    color: white;
+
+    font-size: 0.9rem;
+    font-weight: 700;
+    cursor: pointer;
+
+    transition: background 0.2s ease-in-out;
+
+    &:hover {
+      background: #c51f1f;
+    }
+  }
+}
+
+.reviewsSection {
+  width: 100%;
+  margin: 0 auto;
+
+  h2 {
+    padding: 2rem 0 1.5rem 2rem;
+  }
+}
+
+.detail {
+  border: 1px solid #222;
+  border-radius: 0.5rem;
+  padding: 2rem;
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 6rem;
+  margin-top: 3rem;
+
+  &__imageWrapper {
+    border-radius: 3rem;
+    overflow: hidden;
+  }
+
+  h1 {
+    margin-bottom: 0.5rem;
+    text-decoration: underline;
+  }
+
+  &__meta {
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+  }
+
+  &__descriptionSection {
+    margin-top: 2rem;
+
+    h3 {
+      margin-bottom: 0.5rem;
+      text-decoration: underline;
+    }
+  }
+
+  &__description {
+    max-width: 30ch;
+    line-height: 1.6;
+  }
+}
