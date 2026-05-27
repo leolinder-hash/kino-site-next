@@ -3,9 +3,9 @@ import MovieDetail from "@/components/MovieDetail";
 
 export default async function MovieDetailPage({ params }) {
   const { id } = await params;
-  const url = `http://localhost:3000/api/movies/${id}`;
 
-  const response = await fetch(url);
+  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL;
+  const response = await fetch(`${baseUrl}/api/movies/${id}`);
 
   if (!response.ok) {
     notFound();
