@@ -1,90 +1,222 @@
-.SeatSelection{
+.seatSelection {
     padding: 2rem;
     border-radius: 1.5rem;
-
+  
     background: #181818;
     border: 1px solid #2a2a2a;
     box-shadow: 0 0 1rem rgba(0, 0, 0, 0.35);
-}
-.header{
+    color: white;
+  }
+  
+  .header {
     display: flex;
     justify-content: space-between;
     gap: 1rem;
     align-items: flex-start;
-
+  
     margin-bottom: 1.5rem;
-}
-.eyebrow{
-    margin-bottom: .3rem;
-
-    color: #dbf5b4;
+  }
+  
+  .eyebrow {
+    margin-bottom: 0.3rem;
+  
+    color: #d9f5b4;
     font-size: 0.8rem;
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 0.08em;
-}
-.helpText{
+  }
+  
+  .helpText {
     color: #cfcfcf;
     font-size: 0.9rem;
-}
-.screen{
+  }
+  
+  .screen {
     max-width: 520px;
     margin: 0 auto 2rem;
     padding: 0.8rem;
-
-    border-radius: .5rem;
+  
+    border-radius: 0.5rem;
     background: #d9d9d9;
     color: #111;
-
+  
     font-weight: 700;
     text-align: center;
-}
-.grid{
+  }
+  
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(44px, 1fr));
+    gap: 0.65rem;
+  
+    max-width: 680px;
+    margin: 0 auto;
+  }
+  
+  .seat {
     display: flex;
     justify-content: center;
     align-items: center;
-    min-height: 42px;
-    border-radius: .5rem;
-    font-size: .75rem;
+  
+    min-height: 44px;
+    border: none;
+    border-radius: 0.55rem;
+  
+    font-size: 0.8rem;
     font-weight: 700;
-}
-.available{
+  
+    transition:
+      transform 0.15s ease,
+      background 0.15s ease,
+      color 0.15s ease,
+      box-shadow 0.15s ease;
+  
+    &:not(:disabled) {
+      cursor: pointer;
+    }
+  
+    &:not(:disabled):hover {
+      transform: translateY(-2px);
+    }
+  
+    &:focus-visible {
+      outline: 3px solid #d9f5b4;
+      outline-offset: 3px;
+    }
+  }
+  
+  .available {
     background: #d9d9d9;
-    color:#111;
-}
-.booked{
+    color: #111;
+  
+    &:hover {
+      background: white;
+    }
+  }
+  
+  .selected {
+    background: #d9f5b4;
+    color: #111;
+    box-shadow: 0 0 0 3px rgba(217, 245, 180, 0.25);
+  }
+  
+  .booked {
     background: #9f1717;
     color: white;
-}
-.legend{
+    cursor: not-allowed;
+    opacity: 0.65;
+  }
+  
+  .legend {
     display: flex;
     justify-content: center;
     gap: 1rem;
     flex-wrap: wrap;
-
+  
     margin-top: 1.5rem;
-
+  
     color: #cfcfcf;
-    font-size: .9rem;
-
-    span{
-        display: flex;
-        align-items: center;
-        gap: .5rem;
+    font-size: 0.9rem;
+  
+    span {
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
     }
-    i{
-        width: 16px;
-        height: 16px;
-        display: inline-block;
-        border-radius: .25rem;
+  
+    i {
+      width: 14px;
+      height: 14px;
+      display: inline-block;
+      border-radius: 0.25rem;
     }
-}
-.availableBox{
+  }
+  
+  .availableBox {
     background: #d9d9d9;
-}
-.bookedBox{
+  }
+  
+  .selectedBox {
+    background: #d9f5b4;
+  }
+  
+  .bookedBox {
     background: #9f1717;
-}
-.empty{
+  }
+  
+  .summary {
+    margin-top: 2rem;
+    padding: 1.5rem;
+  
+    border-radius: 1rem;
+    background: #101010;
+    border: 1px solid #2a2a2a;
+  
+    h3 {
+      margin-bottom: 0.8rem;
+    }
+  
+    p {
+      margin-bottom: 1rem;
+      color: #e5e5e5;
+      line-height: 1.5;
+    }
+  }
+  
+  .noSeats {
+    color: #a8a8a8;
+  }
+  
+  .bookingButton {
+    width: 100%;
+    padding: 0.9rem 1.2rem;
+  
+    border: none;
+    border-radius: 0.7rem;
+  
+    background: #9f1717;
+    color: white;
+  
+    font-weight: 700;
+    cursor: pointer;
+  
+    transition:
+      background 0.15s ease,
+      transform 0.15s ease;
+  
+    &:hover:not(:disabled) {
+      background: #c51f1f;
+      transform: translateY(-1px);
+    }
+  
+    &:disabled {
+      background: #555;
+      color: #bbb;
+      cursor: not-allowed;
+    }
+  }
+  
+  .empty {
     color: #cfcfcf;
-}
+  }
+  
+  @media (max-width: 600px) {
+    .seatSelection {
+      padding: 1.2rem;
+    }
+  
+    .header {
+      flex-direction: column;
+    }
+  
+    .grid {
+      grid-template-columns: repeat(auto-fit, minmax(38px, 1fr));
+      gap: 0.5rem;
+    }
+  
+    .seat {
+      min-height: 38px;
+      font-size: 0.7rem;
+    }
+  }

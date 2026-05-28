@@ -33,7 +33,7 @@ export default async function BookingPage({params}) {
     const movie = safeScreening.movie;
     return (
         <section className={styles.bookingPage}>
-            <Link href={`/movies/${movie._id}`} className={styles.backLink}>
+            <Link href={`/booking/${screening._id}`} className={styles.backLink}>
              Tillbaka till filmen
              </Link>
              <section className={styles.movieSummary}>
@@ -59,15 +59,11 @@ export default async function BookingPage({params}) {
                     className={styles.poster}
                 />
              </section>
-             <SeatSelection seats={safeScreening.seats}/>
-             <section className={styles.bookingActions}>
-                <p>
-                    Platsvalet visar här som grund, men ska ändras i nästa issue så att platserna blir klickbara och kopplar platser till bokningsknappen.
-                </p>
-                <button type="button" disabled>
-                    Fortsätt till bokning
-                </button>
-        </section>
+             <SeatSelection 
+                seats={safeScreening.seats}
+                screeningId={screening._id}
+             />
+
         </section>
     );
 }
