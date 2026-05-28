@@ -15,7 +15,7 @@ export async function GET(request) {
         const filter = movieId ? { movie: movieId } : {};
 
         const reviews = await Review.find(filter)
-        .populate('user', 'name')
+        .populate('user', 'username')
         .sort({ createdAt: -1 });
 
         return NextResponse.json(reviews, { status: 200 });

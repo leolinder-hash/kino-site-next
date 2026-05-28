@@ -1,6 +1,7 @@
 import Image from "next/image";
 import styles from "./MovieDetail.module.scss";
 import ReviewForm from "./ReviewForm";
+import MovieReviews from "./MovieDetailReviews";
 import Link from "next/link";
 
 export default function MovieDetail({ movie, screenings = [] }) {
@@ -62,6 +63,7 @@ export default function MovieDetail({ movie, screenings = [] }) {
                     </p>
                   </div>
 
+
                   <Link
                     href={`/booking/${screening._id}`}
                     className={styles.screeningsSection__button}
@@ -73,6 +75,13 @@ export default function MovieDetail({ movie, screenings = [] }) {
             </div>
           )}
         </div>
+      </section>
+      <section className={styles.reviewsSection}>
+        <MovieReviews movieId={movie._id} />
+        <h2>Har du sett filmen?</h2>
+        <ReviewForm
+          movieId={movie._id}
+        />
       </section>
     </main>
   );
