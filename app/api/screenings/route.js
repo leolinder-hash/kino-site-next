@@ -1,5 +1,5 @@
 import { connectDB } from "../../../lib/mongodb.js";
-import Screening from "../../../models/screening.js";
+import Screening from "../../../models/Screening.js";
 import Movie from "../../../models/Movie.js";
 
 export async function GET() {

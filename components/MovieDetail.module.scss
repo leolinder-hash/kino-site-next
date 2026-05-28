@@ -85,3 +85,54 @@
     line-height: 1.6;
   }
 }
+
+.screeningsSection__list {
+  display: grid;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.screeningsSection__item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+
+  padding: 1rem;
+  border-radius: 1rem;
+  background: #181818;
+  border: 1px solid #2a2a2a;
+
+  p {
+    margin: 0.25rem 0;
+  }
+}
+
+.screeningsSection__button {
+  display: inline-block;
+  padding: 0.8rem 1.2rem;
+
+  border-radius: 0.6rem;
+  background: #9f1717;
+  color: white;
+
+  font-weight: 700;
+  text-decoration: none;
+  white-space: nowrap;
+
+  &:hover {
+    background: #c51f1f;
+  }
+}
+
+@media (max-width: 700px) {
+  .screeningsSection__item {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .screeningsSection__button {
+    width: 100%;
+    text-align: center;
+  }
+}

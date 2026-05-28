@@ -2,9 +2,8 @@ import MovieList from "@/components/MovieList";
 import styles from "./page.module.scss";
 
 export default async function MoviePage() {
-    const url = "http://localhost:3000/api/movies";
-
-    const response = await fetch(url);
+    const baseUrl = process.env.NEXT_PUBLIC_BASE_URL;
+    const response = await fetch(`${baseUrl}/api/movies`);
 
     if (!response.ok) {
       return <p>Movies could not load</p>
