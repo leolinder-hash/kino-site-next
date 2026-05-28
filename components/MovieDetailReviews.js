@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import styles from './MovieReviews.module.scss';
+import styles from './MovieDetailReviews.module.scss';
 
 export default function MovieReviews({ movieId }) {
   const [reviews, setReviews] = useState([]);
