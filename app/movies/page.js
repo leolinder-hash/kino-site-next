@@ -2,13 +2,11 @@ import MovieList from "@/components/MovieList";
 import styles from "./page.module.scss";
 
 export default async function MoviePage() {
-  try {
-    const url = "http://localhost:3000/api/movies";
-
-    const response = await fetch(url);
+    const baseUrl = process.env.NEXT_PUBLIC_BASE_URL;
+    const response = await fetch(`${baseUrl}/api/movies`);
 
     if (!response.ok) {
-      throw new Error("Failed to fetch movies");
+      return <p>Movies could not load</p>
     }
 
     const { movies } = await response.json();
@@ -21,8 +19,4 @@ export default async function MoviePage() {
         <MovieList movies={movies} />
       </>
     )
-  } catch (error) {
-    console.log(error);
-    return <p>Movies could not load</p>
-  }
 }
