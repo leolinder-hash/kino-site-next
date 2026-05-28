@@ -33,7 +33,7 @@ export default async function BookingPage({params}) {
     const movie = safeScreening.movie;
     return (
         <section className={styles.bookingPage}>
-            <Link href={`/booking/${screening._id}`} className={styles.backLink}>
+            <Link href={`/movies/${movie._id}`} className={styles.backLink}>
              Tillbaka till filmen
              </Link>
              <section className={styles.movieSummary}>
