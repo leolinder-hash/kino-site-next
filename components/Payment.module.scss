@@ -1,0 +1,61 @@
+.payment {
+  max-width: 70rem;
+  margin: 0 auto;
+  padding: 3rem 2rem;
+
+  &__container {
+    border: 1px solid #222;
+    border-radius: 1.5rem;
+    padding: 2rem;
+  }
+
+  h1 {
+    margin-bottom: 2rem;
+  }
+
+  legend {
+    margin-bottom: 1rem;
+  }
+
+  &__methods {
+    border: none;
+    padding: 0;
+  }
+
+  &__option {
+    border: 1px solid #222;
+    border-radius: 1rem;
+    padding: 1rem;
+    margin-bottom: 1rem;
+
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+  }
+
+  &__error {
+    margin-top: 1rem;
+    color: #c51f1f;
+    font-weight: 600;
+  }
+
+  &__button {
+    margin-top: 2rem;
+    padding: 0.8rem 1.2rem;
+
+    background: #9f1717;
+    border-radius: 0.5rem;
+    border: none;
+    color: white;
+
+    font-size: 0.9rem;
+    font-weight: 700;
+    cursor: pointer;
+
+    transition: background 0.2s ease-in-out;
+
+    &:hover {
+      background: #c51f1f;
+    }
+  }
+}
