@@ -77,11 +77,8 @@ export default function MovieDetail({ movie, screenings = [] }) {
         </div>
       </section>
       <section className={styles.reviewsSection}>
-        <MovieReviews movieId={movie._id} />
         <h2>Har du sett filmen?</h2>
-        <ReviewForm
-          movieId={movie._id}
-        />
+        <MovieReviews movieId={movie._id} />
       </section>
     </main>
   );

@@ -2,32 +2,45 @@
 
 import { useState, useEffect } from 'react';
 import styles from './MovieDetailReviews.module.scss';
+import ReviewForm from './ReviewForm';
 
 export default function MovieReviews({ movieId }) {
   const [reviews, setReviews] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
+  const [user, setUser] = useState(null);
 
-  useEffect(() => {
-    async function getReviews() {
-      setLoading(true);
-      try {
-        const res = await fetch('/api/reviews?movieId=' + movieId);
-        const data = await res.json();
+  async function getReviews() {
+    setLoading(true);
+    try {
+      const res = await fetch('/api/reviews?movieId=' + movieId);
+      const data = await res.json();
 
-        if (res.ok) {
-          setReviews(data);
-        } else {
-          setError('Kunde inte hämta recensioner.');
-        }
-      } catch (err) {
-        setError('Något gick fel.');
+      if (res.ok) {
+        setReviews(data);
+      } else {
+        setError('Kunde inte hämta recensioner.');
       }
-
-      setLoading(false);
+    } catch (err) {
+      setError('Något gick fel.');
     }
 
+    setLoading(false);
+  }
+
+  useEffect(() => {
     getReviews();
+
+    async function getUser() {
+      const res = await fetch('/api/auth/me');
+      const data = await res.json();
+
+      if (res.ok) {
+        setUser(data.user);
+      }
+    }
+
+    getUser();
   }, [movieId]);
 
   let total = 0;
@@ -66,6 +79,15 @@ export default function MovieReviews({ movieId }) {
 
   return (
     <section className={styles.reviews}>
+      {user ? (
+        <ReviewForm
+          movieId={movieId}
+          userId={user.id}
+          onSuccess={getReviews}
+        />
+      ) : (
+        <p>Logga in för att lämna recension.</p>
+      )}
       <div className={styles.reviews__header}>
         <h2 className={styles.reviews__title}>Recensioner</h2>
         {reviews.length > 0 && (
