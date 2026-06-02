@@ -1,3 +1,7 @@
+import Payment from "@/components/Payment"
+
 export default function PaymentPage(){
-  return <h1>This is the payment page!</h1>
+ return ( 
+ <Payment/>
+)
 }
