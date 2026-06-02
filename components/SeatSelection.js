@@ -59,7 +59,12 @@ function getSeatGroup(startSeat, seats, amount) {
 
   return group.map((seat) => getSeatLabel(seat));
 }
-export default function SeatSelection({ seats = [] }) {
+export default function SeatSelection({
+   seats = [],
+   screeningId,
+   movieTitle,
+   moviePoster
+  }) {
   const [ticketCounts, setTicketCounts] = useState({
     regular: 0,
     student: 0,
@@ -128,6 +133,15 @@ export default function SeatSelection({ seats = [] }) {
     seats,
     totalTickets
   );
+
+  const paymentParams = new URLSearchParams({
+    movie: movieTitle || "",
+    image: moviePoster || "",
+    price: String(totalPrice),
+    seats: selectedSeats.join(","),
+  })
+
+  console.log("payment params:", paymentParams.toString());
 
   return (
     <section className={styles.bookingFlow}>
@@ -303,7 +317,7 @@ export default function SeatSelection({ seats = [] }) {
           <strong>{totalPrice} SEK</strong>
         </div>
 
-        <Link href="/payment">
+        <Link href={`/payment?${paymentParams.toString()}`}>
           <button
             type="button"
             className={styles.paymentButton}
