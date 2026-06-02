@@ -4,14 +4,14 @@ import { useState } from "react";
 import MovieCard from "./MovieCard";
 import styles from "./MovieList.module.scss";
 
-export default function MovieList({ movies }) {
+export default function MovieList({ movies, paginated=true }) {
   const [currentPage, setCurrentPage] = useState(1);
 
   const moviesPerPage = 6;
 
   const indexOfLastMovie = currentPage * moviesPerPage;
   const indexOfFirstMovie = indexOfLastMovie - moviesPerPage;
-  const currentMovies = movies.slice(indexOfFirstMovie, indexOfLastMovie);
+  const currentMovies = paginated ? movies.slice(indexOfFirstMovie, indexOfLastMovie) : movies;
   const totalPages = Math.ceil(movies.length / moviesPerPage);
 
 
@@ -22,6 +22,7 @@ export default function MovieList({ movies }) {
           <MovieCard key={movie._id} movie={movie} />
         ))}
       </section>
+      {paginated && (
       <div className={styles.pagination}>
         <button
           onClick={() => setCurrentPage(currentPage - 1)}
@@ -37,6 +38,7 @@ export default function MovieList({ movies }) {
           Nästa
         </button>
       </div>
+      )}
     </div>
   )
 }
