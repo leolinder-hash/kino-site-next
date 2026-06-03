@@ -86,6 +86,7 @@ export async function POST(req) {
         screening.availableSeats -= seats.length;
         await screening.save();
 
+        /*
         const bookingData = {
             screeningId,
             seats,
@@ -102,6 +103,19 @@ export async function POST(req) {
         }
 
         const booking = await Booking.create(bookingData);
+
+        */
+
+        const booking = await Booking.create({
+            userId: verifiedUserId || undefined,
+            guestName: verifiedUserId ? undefined : guestName,
+            guestEmail: verifiedUserId ? undefined : guestEmail,
+            guestPhoneNumber: verifiedUserId ? undefined : guestPhoneNumber,
+            screeningId,
+            seats,
+            deliveryMethod,
+            paymentMethod
+        });
 
         return NextResponse.json({
             success: true,
