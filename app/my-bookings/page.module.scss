@@ -1,0 +1,245 @@
+.container {
+  max-width: 50rem;
+  margin: 0 auto;
+  padding: 2rem 0;
+  min-height: 80vh;
+}
+
+.title {
+  font-size: clamp(2rem, 4vw, 2.8rem);
+  margin-bottom: 2.5rem;
+  text-align: left;
+  letter-spacing: 0.03em;
+  font-weight: 700;
+  border-bottom: 2px solid #9f1717;
+  padding-bottom: 0.75rem;
+  color: #fff;
+}
+
+.status, .error, .empty {
+  text-align: center;
+  padding: 3rem 2rem;
+  background: rgba(26, 26, 26, 0.6);
+  border-radius: 0.75rem;
+  border: 1px solid #2a2a2a;
+}
+
+.status {
+  font-size: 1.2rem;
+  color: #888;
+}
+
+.error {
+  color: #fff;
+  background: rgba(159, 23, 23, 0.15);
+  border-color: #9f1717;
+  font-weight: 600;
+  margin-bottom: 1.5rem;
+}
+
+.empty {
+  p {
+    font-size: 1.2rem;
+    color: #888;
+    margin-bottom: 1.5rem;
+  }
+}
+
+.message {
+  font-size: 1.1rem;
+  color: #aaa;
+  margin-bottom: 2rem;
+  line-height: 1.6;
+}
+
+.button {
+  display: inline-block;
+  padding: 0.8rem 1.8rem;
+  background: #9f1717;
+  color: white;
+  text-decoration: none;
+  border-radius: 0.5rem;
+  font-weight: bold;
+  transition: all 0.2s ease-in-out;
+  border: none;
+  cursor: pointer;
+
+  &:hover {
+    background: #c51f1f;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(197, 31, 31, 0.3);
+  }
+}
+
+.card {
+  padding: 3rem;
+  background: #1a1a1a;
+  border-radius: 0.75rem;
+  border: 1px solid #2a2a2a;
+  text-align: center;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.5);
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.bookingCard {
+  display: flex;
+  background: #1a1a1a;
+  border-radius: 0.75rem;
+  border: 1px solid #2a2a2a;
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+  transition: transform 0.2s ease, border-color 0.2s ease;
+
+  &:hover {
+    transform: translateY(-3px);
+    border-color: #444;
+  }
+}
+
+.cancelledCard {
+  opacity: 0.6;
+  border-color: #222;
+  background: #151515;
+
+  &:hover {
+    transform: none;
+    border-color: #222;
+  }
+}
+
+.imageWrapper {
+  flex-shrink: 0;
+  width: 120px;
+  position: relative;
+  background: #111;
+  display: flex;
+  align-items: center;
+}
+
+.image {
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
+}
+
+.details {
+  flex-grow: 1;
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 1rem;
+  margin-bottom: 0.5rem;
+}
+
+.movieTitle {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: #fff;
+}
+
+.badge {
+  padding: 0.25rem 0.75rem;
+  border-radius: 2rem;
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.badgeConfirmed {
+  background: rgba(46, 125, 50, 0.15);
+  color: #4caf50;
+  border: 1px solid rgba(76, 175, 80, 0.3);
+}
+
+.badgeCancelled {
+  background: rgba(159, 23, 23, 0.15);
+  color: #f44336;
+  border: 1px solid rgba(244, 67, 54, 0.3);
+}
+
+.time, .room, .seats, .bookingId {
+  font-size: 0.95rem;
+  color: #ccc;
+  
+  strong {
+    color: #888;
+    font-weight: 500;
+    margin-right: 0.25rem;
+  }
+}
+
+.bookingId {
+  font-size: 0.85rem;
+  color: #666;
+  margin-top: 0.25rem;
+  
+  strong {
+    color: #555;
+  }
+}
+
+.cancelBtn {
+  align-self: flex-start;
+  margin-top: 1rem;
+  padding: 0.5rem 1.2rem;
+  background: transparent;
+  color: #ff5252;
+  border: 1px solid #ff5252;
+  border-radius: 0.25rem;
+  font-weight: 600;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+
+  &:hover {
+    background: #ff5252;
+    color: #fff;
+    box-shadow: 0 2px 8px rgba(255, 82, 82, 0.4);
+  }
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    background: transparent;
+    color: #666;
+    border-color: #666;
+    box-shadow: none;
+  }
+}
+
+@media (max-width: 48rem) {
+  .bookingCard {
+    flex-direction: column;
+  }
+
+  .imageWrapper {
+    width: 100%;
+    height: 180px;
+    justify-content: center;
+    overflow: hidden;
+  }
+
+  .image {
+    width: auto;
+    height: 100%;
+  }
+
+  .header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+}
