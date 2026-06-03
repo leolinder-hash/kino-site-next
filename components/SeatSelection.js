@@ -4,6 +4,7 @@ import { useState } from "react";
 import styles from "./SeatSelection.module.scss";
 import Link from "next/link";
 
+
 const ticketTypes = [
   {
     id: "regular",
@@ -228,8 +229,8 @@ export default function SeatSelection({ seats = [], screeningId, movieTitle, mov
                     seat.isBooked
                       ? `Plats ${seatLabel} är upptagen`
                       : isSelected
-                      ? `Plats ${seatLabel} är vald`
-                      : `Välj plats ${seatLabel}`
+                        ? `Plats ${seatLabel} är vald`
+                        : `Välj plats ${seatLabel}`
                   }
                 >
                   {seatLabel}

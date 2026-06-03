@@ -33,6 +33,10 @@ const [guestPhoneNumber, setGuestPhoneNumber] = useState("");
   }
 
   async function handlePayment() {
+  const [selectedMethod, setSelectedMethod] = useState("");
+  const [error, setError] = useState("");
+
+  function handlePayment() {
     if (!selectedMethod) {
       setError("Välj ett betalningsalternativ");
       return;
