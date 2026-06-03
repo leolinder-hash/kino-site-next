@@ -1,8 +1,8 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import {notFound} from 'next/navigation';
+import { notFound } from 'next/navigation';
 import mongoose from 'mongoose';
-import {connectDB} from '@/lib/mongodb';
+import { connectDB } from '@/lib/mongodb';
 import Screening from '@/models/Screening';
 import "@/models/Movie";
 import SeatSelection from '@/components/SeatSelection';
@@ -18,15 +18,15 @@ function formatScreeningDate(date) {
     }).format(new Date(date));
 }
 
-export default async function BookingPage({params}) {
-    const {screeningId} = await params;
-    if(!mongoose.Types.ObjectId.isValid(screeningId)){
+export default async function BookingPage({ params }) {
+    const { screeningId } = await params;
+    if (!mongoose.Types.ObjectId.isValid(screeningId)) {
         notFound();
     }
     await connectDB();
     const screening = await Screening.findById(screeningId)
-    .populate('movie').lean();
-    if(!screening){
+        .populate('movie').lean();
+    if (!screening) {
         notFound();
     }
     const safeScreening = JSON.parse(JSON.stringify(screening));
@@ -34,35 +34,36 @@ export default async function BookingPage({params}) {
     return (
         <section className={styles.bookingPage}>
             <Link href={`/movies/${movie._id}`} className={styles.backLink}>
-             Tillbaka till filmen
-             </Link>
-             <section className={styles.movieSummary}>
+                Tillbaka till filmen
+            </Link>
+            <section className={styles.movieSummary}>
                 <div className={styles.movieInfo}>
-                    <p className = {styles.eyebrow}>Bokning</p>
+                    <p className={styles.eyebrow}>Bokning</p>
                     <h1>{movie.title}</h1>
 
                     <p className={styles.meta}>
-                        {movie.duration} min : {movie.genre?.join( "/ ")} : {movie.ageLimit}+  
+                        {movie.duration} min : {movie.genre?.join("/ ")} : {movie.ageLimit}+
                     </p>
                     <p className={styles.screeningTime}>{formatScreeningDate(safeScreening.startTime)}
 
                     </p>
 
-                    <p className = {styles.room}>Salong: {safeScreening.room}</p>
+                    <p className={styles.room}>Salong: {safeScreening.room}</p>
 
                 </div>
-                <Image 
+                <Image
                     src={movie.image || "/kino-logo-v2.png"}
                     alt={`Poster for ${movie.title}`}
                     width={220}
                     height={300}
                     className={styles.poster}
                 />
-             </section>
-             <SeatSelection 
+            </section>
+            <SeatSelection
                 seats={safeScreening.seats}
-                screeningId={screening._id}
-             />
+                movieTitle={movie.title}
+                moviePoster={movie.image}
+            />
 
         </section>
     );
