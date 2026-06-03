@@ -1,5 +1,5 @@
 import Image from "next/image";
-import link from "next/link";
+import Link from "next/link";
 import { notFound } from "next/navigation";
 import mongoose from "mongoose";
 
@@ -124,13 +124,13 @@ export default async function BookingConfirmationPage({ params }) {
                         </div>
                 </section>
                 <section className={styles.actions}>
-                    <link href="/" className={styles.primaryLink}>
+                    <Link href="/" className={styles.primaryLink}>
                     Tillbaka till startsidan
-                    </link>
+                    </Link>
 
-                    <link href="/my-bookings" className={styles.secondaryLink}>
+                    <Link href="/my-bookings" className={styles.secondaryLink}>
                     Se mina bokningar
-                    </link>
+                    </Link>
                 </section>
             </main>
         );

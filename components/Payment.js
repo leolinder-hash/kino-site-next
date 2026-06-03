@@ -18,6 +18,10 @@ export default function Payment({
   const [error, setError] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
 
+const [guestName, setGuestName] = useState("");
+const [guestEmail, setGuestEmail] = useState("");
+const [guestPhoneNumber, setGuestPhoneNumber] = useState("");
+
   const selectedSeats = seats ? seats.split(",").filter(Boolean)
   : [];
 
@@ -51,7 +55,11 @@ export default function Payment({
         body: JSON.stringify({
           screeningId,
           seats: selectedSeats,
-          deliveryMethod: getBookingPaymentMethod(selectedMethod),
+          guestName,
+          guestEmail,
+          guestPhoneNumber,
+          deliveryMethod: "email",
+          paymentMethod: getBookingPaymentMethod(selectedMethod),
         }),
       });
 
@@ -96,6 +104,39 @@ export default function Payment({
         </div>
       </div>
       <div className={styles.payment__container}>
+        <section className={styles.payment__guestInfo}>
+          <h2>Biljettleverans</h2>
+
+          <label className={styles.payment__field}>
+            <span>Namn</span>
+            <input
+              type="text"
+              value={guestName}
+              onChange={(e) => setGuestName(e.target.value)}
+              placeholder="Ditt namn"
+            />
+          </label>
+          
+          <label className={styles.payment__field}>
+            <span>E-post</span>
+            <input
+              type="email"
+              value={guestEmail}
+              onChange={(e) => setGuestEmail(e.target.value)}
+              placeholder="namn@exempel.com"
+              />
+          </label>
+          
+          <label className={styles.payment__field}>
+            <span>Telefonnummer</span>
+            <input
+              type="tel"
+              value={guestPhoneNumber}
+              onChange={(e) => setGuestPhoneNumber(e.target.value)}
+              placeholder="070-123 45 67"
+            />
+          </label>
+        </section>
         <fieldset className={styles.payment__methods}>
           <legend>Välj betalningsalternativ</legend>
           <label className={styles.payment__option}>
