@@ -4,7 +4,7 @@ export default async function PaymentPage({ searchParams }) {
   const params = await searchParams;
   return (
     <Payment
-      movieTitle={params.title}
+      movieTitle={params.movie}
       movieImage={params.image}
       price={params.price}
       seats={params.seats}

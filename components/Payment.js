@@ -24,25 +24,31 @@ export default function Payment({
 
   return (
     <section className={styles.payment}>
+      
+      <h1>Betalning</h1>
+
 
       <div className={styles.payment__summary}>
-        <h2>Din bokning</h2>
+        <div className={styles.payment__summaryDetails}>
+          <h2>Din bokning</h2>
+          {movieTitle && <p>Film: {movieTitle}</p>}
+          {seats && <p>Platser: {seats}</p>}
+          {price && <p>Totalt: {price} SEK</p>}
+        </div>
 
-        {movieTitle && <p>Film: {movieTitle}</p>}
-        {seats && <p>Platser: {seats}</p>}
-        {price && <p>Totalt: {price} SEK</p>}
-        {movieImage && (
-          <Image
-            src={movieImage}
-            alt={`Poster for ${movieTitle}`}
-            width={120}
-            height={160}
-          />
-        )}
+        <div className={styles.payment__imageWrapper}>
+          {movieImage && (
+            <Image
+              className={styles.payment__summaryImage}
+              src={movieImage}
+              alt={`Poster for ${movieTitle}`}
+              width={220}
+              height={260}
+            />
+          )}
+        </div>
       </div>
       <div className={styles.payment__container}>
-        <h1>Betalning</h1>
-
         <fieldset className={styles.payment__methods}>
           <legend>Välj betalningsalternativ</legend>
           <label className={styles.payment__option}>

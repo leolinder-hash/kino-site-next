@@ -61,7 +61,6 @@ export default async function BookingPage({ params }) {
             </section>
             <SeatSelection
                 seats={safeScreening.seats}
-                screeningId={safeScreening._id}
                 movieTitle={movie.title}
                 moviePoster={movie.image}
             />

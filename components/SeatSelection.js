@@ -61,7 +61,6 @@ function getSeatGroup(startSeat, seats, amount) {
 }
 export default function SeatSelection({
    seats = [],
-   screeningId,
    movieTitle,
    moviePoster
   }) {
@@ -140,8 +139,6 @@ export default function SeatSelection({
     price: String(totalPrice),
     seats: selectedSeats.join(","),
   })
-
-  console.log("payment params:", paymentParams.toString());
 
   return (
     <section className={styles.bookingFlow}>
