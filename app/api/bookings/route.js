@@ -1,7 +1,9 @@
 import { NextResponse } from "next/server";
+import { cookies } from "next/headers";
 import { connectDB } from "@/lib/mongodb";
 import Booking from "@/models/Booking";
 import Screening from "@/models/Screening";
+import { AUTH_COOKIE_NAME, verifyAuthToken } from "@/lib/auth";
 
 export async function POST(req) {
     try {
@@ -16,6 +18,20 @@ export async function POST(req) {
             deliveryMethod,
             paymentMethod
         } = await req.json();
+
+        let verifiedUserId = null;
+        try {
+            const cookieStore = await cookies();
+            const token = cookieStore.get(AUTH_COOKIE_NAME)?.value;
+            if (token) {
+                const decoded = verifyAuthToken(token);
+                if (decoded && decoded.userId) {
+                    verifiedUserId = decoded.userId;
+                }
+            }
+        } catch (cookieError) {
+            console.error("Error reading auth cookie:", cookieError);
+        }
 
         const existingBooking = await Booking.findOne({
             screeningId,
@@ -70,16 +86,22 @@ export async function POST(req) {
         screening.availableSeats -= seats.length;
         await screening.save();
 
-        const booking = await Booking.create({
-            userId,
-            guestName,
-            guestEmail,
-            guestPhoneNumber,
+        const bookingData = {
             screeningId,
             seats,
             deliveryMethod,
             paymentMethod
-        });
+        };
+
+        if (verifiedUserId) {
+            bookingData.userId = verifiedUserId;
+        } else {
+            bookingData.guestName = guestName;
+            bookingData.guestEmail = guestEmail;
+            bookingData.guestPhoneNumber = guestPhoneNumber;
+        }
+
+        const booking = await Booking.create(bookingData);
 
         return NextResponse.json({
             success: true,
@@ -93,3 +115,44 @@ export async function POST(req) {
     }
 }
 
+export async function GET() {
+    try {
+        await connectDB();
+        const cookieStore = await cookies();
+        const token = cookieStore.get(AUTH_COOKIE_NAME)?.value;
+        if (!token) {
+            return NextResponse.json({
+                success: false,
+                error: "Authentication required"
+            }, { status: 401 });
+        }
+
+        const decoded = verifyAuthToken(token);
+        if (!decoded || !decoded.userId) {
+            return NextResponse.json({
+                success: false,
+                error: "Invalid or expired token"
+            }, { status: 401 });
+        }
+
+        const bookings = await Booking.find({ userId: decoded.userId })
+            .populate({
+                path: "screeningId",
+                populate: {
+                    path: "movie"
+                }
+            })
+            .sort({ bookingDate: -1 });
+
+        return NextResponse.json({
+            success: true,
+            bookings
+        }, { status: 200 });
+
+    } catch (error) {
+        return NextResponse.json({
+            success: false,
+            error: error.message
+        }, { status: 500 });
+    }
+}
