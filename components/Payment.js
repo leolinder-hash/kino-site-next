@@ -1,25 +1,72 @@
 "use client"
 
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 import styles from "./Payment.module.scss";
 import Image from "next/image";
 
 export default function Payment({
+  screeningId,
   movieTitle,
   movieImage,
   price,
   seats
 }) {
+  const router = useRouter();
+
   const [selectedMethod, setSelectedMethod] = useState("");
   const [error, setError] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
-  function handlePayment() {
+  const selectedSeats = seats ? seats.split(",").filter(Boolean)
+  : [];
+
+  function getBookingPaymentMethod(method) {
+    if (method === "cashRegister") {
+      return "counter";
+    }
+    return method;
+  }
+
+  async function handlePayment() {
     if (!selectedMethod) {
       setError("Välj ett betalningsalternativ");
       return;
     }
+    if(!screeningId || selectedSeats.length === 0){
+      setError("bokningsinformation saknas, gå till boka sidan och välj platser igen");
+      return;
+    }
 
     setError("");
+    setIsSubmitting(true);
+
+    try {
+      const response = await fetch("/api/bookings", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        credentials: "include",
+        body: JSON.stringify({
+          screeningId,
+          seats: selectedSeats,
+          deliveryMethod: getBookingPaymentMethod(selectedMethod),
+        }),
+      });
+
+      const data = await response.json();
+
+      if(!response.ok || !data.success){
+        setError(data.error || "Kunde inte skapa bokningen");
+        return;
+  }
+  router.push(`/booking/confirmation/${data.booking._id}`);
+}catch{
+  setError("Ett fel inträffade vid betalningen, försök igen");
+}finally{
+  setIsSubmitting(false);
+}
   }
 
   return (
@@ -82,10 +129,11 @@ export default function Payment({
           type="button"
           className={styles.payment__button}
           onClick={handlePayment}
+          disabled={isSubmitting}
         >
-          Betala
+          {isSubmitting ? "skapar bokning..." : "Betala"}
         </button>
       </div>
     </section >
-  )
+  );
 }

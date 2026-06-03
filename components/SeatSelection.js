@@ -4,7 +4,6 @@ import { useState } from "react";
 import styles from "./SeatSelection.module.scss";
 import Link from "next/link";
 
-
 const ticketTypes = [
   {
     id: "regular",
@@ -59,11 +58,7 @@ function getSeatGroup(startSeat, seats, amount) {
 
   return group.map((seat) => getSeatLabel(seat));
 }
-export default function SeatSelection({
-   seats = [],
-   movieTitle,
-   moviePoster
-  }) {
+export default function SeatSelection({ seats = [], screeningId, movieTitle, moviePoster }) {
   const [ticketCounts, setTicketCounts] = useState({
     regular: 0,
     student: 0,
@@ -123,22 +118,18 @@ export default function SeatSelection({
       return;
     }
     setSelectedSeats(seatsToSelect);
-
   }
   const isReadyForPayment =
     totalTickets > 0 && selectedSeats.length === totalTickets;
-  const previewSeats = getSeatGroup(
-    hoveredSeat,
-    seats,
-    totalTickets
-  );
+  const previewSeats = getSeatGroup(hoveredSeat, seats, totalTickets);
 
   const paymentParams = new URLSearchParams({
+    screeningId: screeningId || "",
     movie: movieTitle || "",
     image: moviePoster || "",
     price: String(totalPrice),
     seats: selectedSeats.join(","),
-  })
+  });
 
   return (
     <section className={styles.bookingFlow}>
@@ -237,8 +228,8 @@ export default function SeatSelection({
                     seat.isBooked
                       ? `Plats ${seatLabel} är upptagen`
                       : isSelected
-                        ? `Plats ${seatLabel} är vald`
-                        : `Välj plats ${seatLabel}`
+                      ? `Plats ${seatLabel} är vald`
+                      : `Välj plats ${seatLabel}`
                   }
                 >
                   {seatLabel}
@@ -273,7 +264,9 @@ export default function SeatSelection({
         </div>
 
         {totalTickets === 0 ? (
-          <p className={styles.noSeats}>Du har inte valt några biljetter ännu.</p>
+          <p className={styles.noSeats}>
+            Du har inte valt några biljetter ännu.
+          </p>
         ) : (
           <div className={styles.summaryList}>
             {ticketTypes.map((ticketType) => {
@@ -314,15 +307,18 @@ export default function SeatSelection({
           <strong>{totalPrice} SEK</strong>
         </div>
 
-        <Link href={`/payment?${paymentParams.toString()}`}>
-          <button
-            type="button"
+        {isReadyForPayment ? (
+          <Link
+            href={`/payment?${paymentParams.toString()}`}
             className={styles.paymentButton}
-            disabled={!isReadyForPayment}
           >
             Fortsätt till betalning
+          </Link>
+        ) : (
+          <button type="button" className={styles.paymentButton} disabled>
+            Fortsätt till betalning
           </button>
-        </Link>
+        )}
       </section>
     </section>
   );
