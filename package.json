@@ -13,7 +13,6 @@
     "seed:movies": "node --env-file=.env.local scripts/seedMovies.js",
     "seed:reviews": "node --env-file=.env.local scripts/seedReviews.js",
     "seed:users": "node --env-file=.env.local scripts/seedUsers.js"
-
   },
   "dependencies": {
     "bcryptjs": "^3.0.3",
@@ -25,6 +24,7 @@
     "sass": "^1.99.0"
   },
   "devDependencies": {
+    "cypress": "^15.16.0",
     "eslint": "^9",
     "eslint-config-next": "16.2.6",
     "jest": "^30.4.2"
