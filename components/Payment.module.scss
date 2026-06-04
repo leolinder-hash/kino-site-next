@@ -90,3 +90,39 @@
     }
   }
 }
+.payment__guestInfo {
+  display: grid;
+  gap: 1rem;
+  margin-bottom: 2rem;
+
+  h2 {
+    margin-bottom: 0.5rem;
+  }
+}
+
+.payment__field {
+  display: grid;
+  gap: 0.4rem;
+
+  span {
+    font-weight: 700;
+  }
+
+  input {
+    width: 100%;
+    padding: 0.9rem 1rem;
+
+    border-radius: 0.7rem;
+    border: 1px solid #2a2a2a;
+
+    background: #101010;
+    color: white;
+
+    font: inherit;
+
+    &:focus {
+      outline: 2px solid #d9f5b4;
+      outline-offset: 2px;
+    }
+  }
+}
