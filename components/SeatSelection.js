@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import styles from "./SeatSelection.module.scss";
+import Link from "next/link";
 
 
 const ticketTypes = [
@@ -28,37 +29,37 @@ function getSeatLabel(seat) {
   return `${seat.row}${seat.number}`;
 }
 function getSeatGroup(startSeat, seats, amount) {
-    if (!startSeat || amount === 0) {
-      return [];
-    }
-  
-    const sameRowSeats = seats
-      .filter((seat) => seat.row === startSeat.row)
-      .sort((a, b) => a.number - b.number);
-  
-    const startIndex = sameRowSeats.findIndex(
-      (seat) => seat.number === startSeat.number
-    );
-  
-    if (startIndex === -1) {
-      return [];
-    }
-  
-    const group = sameRowSeats.slice(startIndex, startIndex + amount);
-  
-    if (group.length < amount) {
-      return [];
-    }
-  
-    const hasBookedSeat = group.some((seat) => seat.isBooked);
-  
-    if (hasBookedSeat) {
-      return [];
-    }
-  
-    return group.map((seat) => getSeatLabel(seat));
+  if (!startSeat || amount === 0) {
+    return [];
   }
-export default function SeatSelection({ seats = [] }) {
+
+  const sameRowSeats = seats
+    .filter((seat) => seat.row === startSeat.row)
+    .sort((a, b) => a.number - b.number);
+
+  const startIndex = sameRowSeats.findIndex(
+    (seat) => seat.number === startSeat.number
+  );
+
+  if (startIndex === -1) {
+    return [];
+  }
+
+  const group = sameRowSeats.slice(startIndex, startIndex + amount);
+
+  if (group.length < amount) {
+    return [];
+  }
+
+  const hasBookedSeat = group.some((seat) => seat.isBooked);
+
+  if (hasBookedSeat) {
+    return [];
+  }
+
+  return group.map((seat) => getSeatLabel(seat));
+}
+export default function SeatSelection({ seats = [], screeningId, movieTitle, moviePoster }) {
   const [ticketCounts, setTicketCounts] = useState({
     regular: 0,
     student: 0,
@@ -118,15 +119,18 @@ export default function SeatSelection({ seats = [] }) {
       return;
     }
     setSelectedSeats(seatsToSelect);
-  
-    }
+  }
   const isReadyForPayment =
     totalTickets > 0 && selectedSeats.length === totalTickets;
-    const previewSeats = getSeatGroup(
-      hoveredSeat,
-      seats,
-      totalTickets
-    );
+  const previewSeats = getSeatGroup(hoveredSeat, seats, totalTickets);
+
+  const paymentParams = new URLSearchParams({
+    screeningId: screeningId || "",
+    movie: movieTitle || "",
+    image: moviePoster || "",
+    price: String(totalPrice),
+    seats: selectedSeats.join(","),
+  });
 
   return (
     <section className={styles.bookingFlow}>
@@ -207,7 +211,7 @@ export default function SeatSelection({ seats = [] }) {
                 seatClassName += ` ${styles.selected}`;
               } else if (isPreview) {
                 seatClassName += ` ${styles.preview}`;
-              }else {
+              } else {
                 seatClassName += ` ${styles.available}`;
               }
 
@@ -225,8 +229,8 @@ export default function SeatSelection({ seats = [] }) {
                     seat.isBooked
                       ? `Plats ${seatLabel} är upptagen`
                       : isSelected
-                      ? `Plats ${seatLabel} är vald`
-                      : `Välj plats ${seatLabel}`
+                        ? `Plats ${seatLabel} är vald`
+                        : `Välj plats ${seatLabel}`
                   }
                 >
                   {seatLabel}
@@ -261,7 +265,9 @@ export default function SeatSelection({ seats = [] }) {
         </div>
 
         {totalTickets === 0 ? (
-          <p className={styles.noSeats}>Du har inte valt några biljetter ännu.</p>
+          <p className={styles.noSeats}>
+            Du har inte valt några biljetter ännu.
+          </p>
         ) : (
           <div className={styles.summaryList}>
             {ticketTypes.map((ticketType) => {
@@ -302,13 +308,18 @@ export default function SeatSelection({ seats = [] }) {
           <strong>{totalPrice} SEK</strong>
         </div>
 
-        <button
-          type="button"
-          className={styles.paymentButton}
-          disabled={!isReadyForPayment}
-        >
-          Fortsätt till betalning
-        </button>
+        {isReadyForPayment ? (
+          <Link
+            href={`/payment?${paymentParams.toString()}`}
+            className={styles.paymentButton}
+          >
+            Fortsätt till betalning
+          </Link>
+        ) : (
+          <button type="button" className={styles.paymentButton} disabled>
+            Fortsätt till betalning
+          </button>
+        )}
       </section>
     </section>
   );

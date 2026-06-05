@@ -32,8 +32,7 @@ export default function LoginForm() {
         return;
       }
 
-      router.push(data.redirectTo || '/');
-      router.refresh();
+      window.location.href = data.redirect || '/';
     } catch (err) {
       setGeneralError('Ett nätverksfel uppstod. Försök igen.');
     } finally {
