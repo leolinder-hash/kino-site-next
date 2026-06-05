@@ -46,4 +46,32 @@
       background: #c7e89e !important;
     }
   }
+
+  .userInfo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: -2.3rem;
+  }
+
+  .username {
+    font-size: 1rem;
+    color: white;
+    padding-bottom: 1rem;
+  }
+
+  .logoutBtn {
+    background: #d9f5b4 !important;
+    color: black !important;
+    padding: 0.8rem 1.2rem;
+    border: none;
+    border-radius: 0.5rem;
+    font-size: 0.9rem;
+    font-weight: 700;
+    cursor: pointer;
+
+    &:hover {
+      background: #c7e89e !important;
+    }
+  }
 }
