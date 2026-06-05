@@ -1,22 +1,20 @@
 import MovieList from "@/components/MovieList";
+import { connectDB } from "@/lib/mongodb";
+import Movie from "@/models/Movie";
 import styles from "./page.module.scss";
 
+export const runtime = "nodejs";
+export const dynamic = "force-dynamic";
 export default async function MoviePage() {
-    const baseUrl = process.env.NEXT_PUBLIC_BASE_URL;
-    const response = await fetch(`${baseUrl}/api/movies`);
+  await connectDB();
 
-    if (!response.ok) {
-      return <p>Movies could not load</p>
-    }
+  const movies = await Movie.find({}).lean();
+  const safeMovies = JSON.parse(JSON.stringify(movies));
 
-    const { movies } = await response.json();
-
-    return (
-      <>
-        <h1 className={styles.page__title}>
-          Våra filmer
-        </h1>
-        <MovieList movies={movies} />
-      </>
-    )
+  return (
+    <>
+      <h1 className={styles.page__title}>Våra filmer</h1>
+      <MovieList movies={safeMovies} />
+    </>
+  );
 }
