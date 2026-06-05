@@ -22,6 +22,14 @@ export default function RegisterPage() {
       ...prev,
       [name]: value,
     }));
+
+    setErrors((prev) => ({
+      ...prev,
+      [name]: "",
+    }));
+
+    setServerError("");
+    setSuccessMessage("");
   }
 
   function validateForm() {
@@ -65,8 +73,8 @@ export default function RegisterPage() {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          username: formData.username,
-          email: formData.email,
+          username: formData.username.trim(),
+          email: formData.email.trim(),
           password: formData.password,
         }),
       });
@@ -74,6 +82,9 @@ export default function RegisterPage() {
       const data = await response.json();
 
       if (!response.ok) {
+        if (data.errors) {
+          setErrors(data.errors);
+        }
         setServerError(data.message || "Registration failed");
         return;
       }
@@ -84,6 +95,7 @@ export default function RegisterPage() {
         email: "",
         password: "",
       });
+      setErrors({});
     } catch (error) {
       setServerError("Something went wrong. Please try again.");
     }
@@ -105,6 +117,7 @@ export default function RegisterPage() {
               value={formData.username}
               onChange={handleChange}
               placeholder="Enter your username"
+              autoComplete="username"
             />
             {errors.username && (
               <p className={styles.error}>{errors.username}</p>
@@ -120,6 +133,7 @@ export default function RegisterPage() {
               value={formData.email}
               onChange={handleChange}
               placeholder="Enter your email"
+              autoComplete="email"
             />
             {errors.email && <p className={styles.error}>{errors.email}</p>}
           </div>
@@ -133,6 +147,7 @@ export default function RegisterPage() {
               value={formData.password}
               onChange={handleChange}
               placeholder="Enter your password"
+              autoComplete="new-password"
             />
             {errors.password && (
               <p className={styles.error}>{errors.password}</p>
